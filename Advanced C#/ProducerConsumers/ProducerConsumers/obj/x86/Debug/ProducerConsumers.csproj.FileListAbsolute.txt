@@ -1,7 +1,0 @@
-c:\users\psycho\documents\visual studio 2010\Projects\ProducerConsumers\ProducerConsumers\bin\Debug\ProducerConsumers.exe
-c:\users\psycho\documents\visual studio 2010\Projects\ProducerConsumers\ProducerConsumers\bin\Debug\ProducerConsumers.pdb
-c:\users\psycho\documents\visual studio 2010\Projects\ProducerConsumers\ProducerConsumers\obj\x86\Debug\ProducerConsumers.exe
-c:\users\psycho\documents\visual studio 2010\Projects\ProducerConsumers\ProducerConsumers\obj\x86\Debug\ProducerConsumers.pdb
-C:\Users\Psycho\documents\visual studio 2010\Projects\ProducerConsumers\ProducerConsumers\obj\x86\Debug\ProducerConsumers.csprojResolveAssemblyReference.cache
-C:\Users\Psycho\Documents\GitHub\CooperUnion\Advanced C#\ProducerConsumers\ProducerConsumers\obj\x86\Debug\ProducerConsumers.exe
-C:\Users\Psycho\Documents\GitHub\CooperUnion\Advanced C#\ProducerConsumers\ProducerConsumers\obj\x86\Debug\ProducerConsumers.pdb
