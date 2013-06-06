@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="ATMWebService.asmx.cs" Class="nsATMWebSvc.ATMSvc" %>
