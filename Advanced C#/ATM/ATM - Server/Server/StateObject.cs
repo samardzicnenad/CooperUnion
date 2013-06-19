@@ -1,4 +1,11 @@
-﻿using System.Net.Sockets;
+﻿/**********************************************************************
+ * Created by : MSDN
+ * Date       : -
+ * Description: State object class taken from MSDN Asynchronous Server Socket Example
+ * Idea       : The class represents state object for reading client data asynchronously
+ * Parameters : -
+ **********************************************************************/
+using System.Net.Sockets;
 using System.Text;
 
 // State object for reading client data asynchronously

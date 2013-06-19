@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/16/2013
+ * Description: The class maintains ATM user details (login name and password)
+ * Idea       : This class performs following activities:
+ *              - check if the user with the selected <user name> already exists in the system
+ *              - creates new user with the selected <user name>
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.IO;
 
 namespace Server

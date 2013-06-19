@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/16/2013
+ * Description: The class maintains ATM transaction details (transaction ID, time stamp, account, action)
+ * Idea       : This class performs following activities:
+ *              - for the user's account creates a transaction data
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.IO;
 
 namespace Server

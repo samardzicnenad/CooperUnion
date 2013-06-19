@@ -1,4 +1,22 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/16/2013
+ * Description: The class represents ATM simulation using socket communication.
+ * Idea       : ATM Server side application waits for and processes client's ATM requests.
+ *              Main thread is up and running all of the time and each client request is delegated to a new thread.
+ *              A new thread processes the request and sends back the response.
+ *              "Database" for the application is set of flat files. All of the "connected actions" are performed as one transaction - 
+ *              complete success or rollback.
+ *              This ATM model performs following activities:
+ *              - check if the user with the selected <user name> already exists in the system
+ *              - creates new user with the selected <user name>
+ *              - for the new user creates a customer and an account data
+ *              - performs deposit and withdrawal activities
+ *              - checks for the user's balance
+ *              Application keeps error log - using log4net.
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;

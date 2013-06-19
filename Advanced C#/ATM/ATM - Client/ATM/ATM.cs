@@ -1,8 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/16/2013
+ * Description: The class represents client ATM simulation.
+ * Idea       : ATM Client side application runs in two phases:
+ *              - greeting phase
+ *                  - checks for an existing account
+ *                  - creates new user account, customer and account
+ *              - transaction phase
+ *                  - makes deposit or withdrawal
+ *                  - checks balance
+ *              It also manages communication with the server and perform some helper functions.
+ *              This ATM model performs following activities:
+ *              - check if the user with the selected <user name> already exists in the system
+ *              - creates new user with the selected <user name>
+ *              - for the new user creates a customer and an account data
+ *              - performs deposit and withdrawal activities
+ *              - checks for the user's balance
+ *              Application keeps error log - using log4net.
+ * Parameters : -
+ **********************************************************************/
+using System;
 using log4net;
 
 namespace ATM
@@ -11,7 +28,7 @@ namespace ATM
     {
         AsynchronousClient myAC;
         private string sUser, sPassword;
-        private Boolean bLoggedIn; //, bNewCycle;
+        private Boolean bLoggedIn;
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ATM));
 
@@ -23,7 +40,6 @@ namespace ATM
             this.sUser = "";
             this.sPassword = "";
             this.bLoggedIn = false;
-            //this.bNewCycle = false;
         }
 
         /******User interface section******/
@@ -271,7 +287,6 @@ namespace ATM
         //Exits the ATM
         private void Exit()
         {
-            //DISCONNECT FROM THE SERVER
             if (bLoggedIn)
                 LogOut();
             Console.Clear();
@@ -296,8 +311,6 @@ namespace ATM
         {
             Console.Clear();
             Console.WriteLine(sMessage);
-            /*Console.WriteLine("Press any key to continue");
-            Console.ReadKey(true);*/
             System.Threading.Thread.Sleep(2500);
         }
 
@@ -420,26 +433,6 @@ namespace ATM
         {
             try
             {
-                /*char cChoice = '\0';
-                Boolean bFirsPass = true;
-
-                Console.Clear();
-                Console.WriteLine("Would you like to see the account's turnover? (Y/N)");
-                do
-                {
-                    if (!bFirsPass)
-                    {
-                        if (!(cChoice.ToString().Equals("\r") || cChoice.ToString().Equals("\n")))
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Incorrect choice! Please, enter Y or N!");
-                        }
-                    }
-                    cChoice = Console.ReadKey(true).KeyChar;
-                    bFirsPass = false;
-                } while (cChoice != 'Y' && cChoice != 'y' && cChoice != 'N' && cChoice != 'n');
-                Console.Clear();
-                return myAC.Balance(sUser, "ACCOUNT", "TRANSACTION", "ACTION", cChoice.ToString().ToUpper());*/
                 Console.Clear();
                 return myAC.fUniversal("BALANCE", sUser, "N");
             }
@@ -460,16 +453,11 @@ namespace ATM
             
             //Check connection to server
             myATM.Connected();
-            //while (true)
-            //{
-                myATM.GreetingPhase();
-                //while (!myATM.bNewCycle)
-                while (true)
-                {
-                    myATM.TransactionsPhase();
-                }
-                //myATM.bNewCycle = false;
-            //}
+            myATM.GreetingPhase();
+            while (true)
+            {
+                myATM.TransactionsPhase();
+            }
         }
     }
 }

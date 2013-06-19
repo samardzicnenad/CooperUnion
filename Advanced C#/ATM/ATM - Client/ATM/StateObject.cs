@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : MSDN
+ * Date       : -
+ * Description: State object class taken from MSDN Asynchronous Client Socket Example
+ * Idea       : The class represents state object for receiving data from remote device
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.Net.Sockets;
 using System.Text;
 

@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/16/2013
+ * Description: The class maintains ATM customer details (full name, account number)
+ * Idea       : This class performs following activities:
+ *              - for the user creates a customer data
+ *              - returns customer's account number
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.IO;
 
 namespace Server

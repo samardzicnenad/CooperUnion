@@ -1,4 +1,17 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/16/2013
+ * Description: The class represents client ATM communication handler - using sockets.
+ * Idea       : ATM Client side application receives client's ATM requests, builds "the appropriate sentence" and sends request to the server.
+ *              This class sends different client's ATM requests using one universal function and receives the response.
+ *              Signals:
+ *              -1: error
+ *               0: negative outcome
+ *               1: positive outcome
+ *              Application keeps error log - using log4net.
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
