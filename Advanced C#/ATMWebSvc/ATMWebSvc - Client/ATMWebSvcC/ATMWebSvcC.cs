@@ -1,4 +1,24 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/30/2013
+ * Description: The class represents client ATM simulation.
+ * Idea       : ATM Client side application runs in two phases:
+ *              - greeting phase
+ *                  - checks for an existing account
+ *                  - creates new user account, customer and account
+ *              - transaction phase
+ *                  - makes deposit or withdrawal
+ *                  - checks balance
+ *              It also manages login/logout with the server and perform some helper functions.
+ *              This ATM model performs following activities:
+ *              - check if the user with the selected <user name> already exists in the system
+ *              - creates new user with the selected <user name>
+ *              - for the new user creates a customer and an account data
+ *              - performs deposit and withdrawal activities
+ *              - checks for the user's balance
+ * Parameters : -
+ **********************************************************************/
+using System;
 using ATMWebSvcC.ATMRef;
 
 namespace nsATMWebSvcC
@@ -376,26 +396,6 @@ namespace nsATMWebSvcC
         {
             try
             {
-                /*char cChoice = '\0';
-                Boolean bFirsPass = true;
-
-                Console.Clear();
-                Console.WriteLine("Would you like to see the account's turnover? (Y/N)");
-                do
-                {
-                    if (!bFirsPass)
-                    {
-                        if (!(cChoice.ToString().Equals("\r") || cChoice.ToString().Equals("\n")))
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Incorrect choice! Please, enter Y or N!");
-                        }
-                    }
-                    cChoice = Console.ReadKey(true).KeyChar;
-                    bFirsPass = false;
-                } while (cChoice != 'Y' && cChoice != 'y' && cChoice != 'N' && cChoice != 'n');
-                Console.Clear();
-                return myAC.Balance(sUser, "ACCOUNT", "TRANSACTION", "ACTION", cChoice.ToString().ToUpper());*/
                 Console.Clear();
                 return ATMSvcRef.Process(fUniversal("BALANCE", sUser, "N"));
             }

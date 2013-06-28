@@ -1,4 +1,11 @@
-﻿namespace nsATMWebSvc
+﻿/**********************************************************************
+ * Created by : StackOverflow
+ * Date       : -
+ * Description: The class represents 2 element tuple
+ * Idea       : MS .NET 3.5 doesn't support Tuple structure, so I used finished class
+ * Parameters : -
+ **********************************************************************/
+namespace nsATMWebSvc
 {
     public class Tuple<T1, T2>
     {

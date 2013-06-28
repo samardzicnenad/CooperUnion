@@ -1,4 +1,19 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/30/2013
+ * Description: The class represents ATM simulation using .NET 3.5 web service.
+ * Idea       : ATM Server side application serves client's ATM requests.
+ *              "Database" for the application is set of flat files. All of the "connected actions" are performed as one transaction - 
+ *              complete success or rollback.
+ *              This ATM model performs following activities:
+ *              - check if the user with the selected <user name> already exists in the system
+ *              - creates new user with the selected <user name>
+ *              - for the new user creates a customer and an account data
+ *              - performs deposit and withdrawal activities
+ *              - checks for the user's balance
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.Web.Services;
 using System.Transactions;
 using System.IO;
@@ -46,7 +61,6 @@ namespace nsATMWebSvc
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                //log.Debug(ex.ToString());
                 return "-1";
             }
         }
@@ -153,87 +167,3 @@ namespace nsATMWebSvc
         }
     }
 }
-
-/* ROB'S CODE
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
-using System.IO;
-
-namespace AtmWebSvc
-{
-    /// <summary>
-    /// Summary description for Service1
-    /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
-    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-    [System.ComponentModel.ToolboxItem(false)]
-    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
-    public class Service1 : System.Web.Services.WebService
-    {
-        private static string credentialsFileName = @"C:\credentials.csv";
-        private static string sessionsFileName = @"C:\sessions.csv";
-
-        private static FileInfo credentialsFile;
-        private static FileInfo sessionsFile;
-
-        public Service1()
-        {
-            try
-            {
-                credentialsFile = new FileInfo(credentialsFileName);
-                sessionsFile = new FileInfo(sessionsFileName);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-           
-        [WebMethod]
-        public string Register(string uid, string pwd)
-        {
-            using (StreamWriter sw = credentialsFile.AppendText())
-            {
-                sw.WriteLine(uid + "," + pwd);
-                sw.Close();
-            }
-            return("OK");
-        }
-
-        [WebMethod]
-        public string Login(string uid, string pwd)
-        {
-            Dictionary<string, string> dic = loadCredentials();
-            if (dic.ContainsKey(uid))
-            {
-                if (pwd.Equals(dic[uid]))
-                {
-                    return ((Guid.NewGuid()).ToString());
-                }
-            }
-            return ("REJECTED");
-        }
-
-        private Dictionary<string, string> loadCredentials()
-        {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-
-            using (StreamReader sr = new StreamReader(credentialsFile.OpenRead()))
-            {
-                string line = (string)null;
-
-                while ((line = sr.ReadLine()) != (string)null)
-                {
-                    string[] lineVals = line.Split(',');
-                    dic.Add(lineVals[0], lineVals[1]);
-                }
-            }
-            return (dic);
-        }
-    }
-}
-*/

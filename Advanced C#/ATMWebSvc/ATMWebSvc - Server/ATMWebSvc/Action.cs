@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/30/2013
+ * Description: The class maintains ATM action details (action type, ammount)
+ * Idea       : This class performs following activities:
+ *              - for the transaction creates an action data
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.IO;
 
 namespace nsATMWebSvc

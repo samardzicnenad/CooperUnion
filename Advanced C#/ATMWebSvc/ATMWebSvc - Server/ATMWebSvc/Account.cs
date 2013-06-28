@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**********************************************************************
+ * Created by : Nenad Samardzic
+ * Date       : 05/30/2013
+ * Description: The class maintains ATM account details (account number, date of creation, related transactions)
+ * Idea       : This class performs following activities:
+ *              - for the user creates/updates an account data
+ *              - calculates/returns customer's account balance
+ * Parameters : -
+ **********************************************************************/
+using System;
 using System.IO;
 
 namespace nsATMWebSvc
