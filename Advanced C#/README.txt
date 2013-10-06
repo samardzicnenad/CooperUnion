@@ -15,3 +15,6 @@ Client-Server ATM simulation using socket communication
 
 Programming assignment: ATMWebSvc
 Client-Server ATM simulation using web service
+
+Programming assignment: ATMWCF
+Client-Server ATM simulation using Windows Communication Foundation
