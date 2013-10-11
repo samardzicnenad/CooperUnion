@@ -1,21 +1,15 @@
 ﻿/**********************************************************************
  * Created by : Nenad Samardzic
- * Date       : 06/27/2013
+ * Date       : 07/20/2013
  * Description: The class represents client ATM simulation.
  * Idea       : ATM Client side application runs in two phases:
  *              - greeting phase
- *                  - checks for an existing account
- *                  - creates new user account, customer and account
+ *                  - log in for an existing customer with the provided <user name>
+ *                  - create new customer with the provided <user name>
  *              - transaction phase
- *                  - makes deposit or withdrawal
- *                  - checks balance
+ *                  - make deposit or withdrawal
+ *                  - check the user's balance
  *              It also manages login/logout with the server and perform some helper functions.
- *              This ATM model performs following activities:
- *              - check if the user with the selected <user name> already exists in the system
- *              - creates new user with the selected <user name>
- *              - for the new user creates a customer and an account data
- *              - performs deposit and withdrawal activities
- *              - checks for the user's balance 
  * Parameters : -
  **********************************************************************/
 using System;
@@ -37,7 +31,7 @@ namespace nsATMWCFC
             this.bLoggedIn = false;
         }
 
-        //Responses to selected actions
+        //Response to selected action
         private void GreetingPhase()
         {
             switch (Greeting())
@@ -46,8 +40,7 @@ namespace nsATMWCFC
                     Exit();
                     break;
                 case 1: //create an account
-                    if (CreateAccount().Equals("1"))
-                        CreateCustAcc(sUser);
+                    CreateAccount();
                     WaitTime("Log in with your new credentials!");
                     ReLogIn();
                     break;
@@ -103,7 +96,6 @@ namespace nsATMWCFC
             {
                 case 0:
                     Exit();
-                    //this.bNewCycle = true;
                     break;
                 case 1:
                     if (DepWith("deposit").Equals("1"))
@@ -117,6 +109,7 @@ namespace nsATMWCFC
                     break;
                 case 3:
                     WaitTime(Balance());
+                    System.Threading.Thread.Sleep(7500);
                     break;
                 default:
                     break;
@@ -286,6 +279,7 @@ namespace nsATMWCFC
         private string CreateAccount()
         {
             Boolean bFirstPass = true;
+            string sFName, sLName, sAccount;
 
             try
             {
@@ -294,7 +288,7 @@ namespace nsATMWCFC
                     do
                     {
                         Console.Clear();
-                        if (!bFirstPass) Console.WriteLine("That user name is already taken.");
+                        if (!bFirstPass) Console.WriteLine("That user name is either already taken or not allowed.");
                         Console.WriteLine("Please, enter your username:");
                         sUser = Console.ReadLine();
                     } while (sUser == "");
@@ -325,22 +319,6 @@ namespace nsATMWCFC
                     }
                     while (key.Key != ConsoleKey.Enter);
                 } while (sPassword == "");
-                return ATMWFCRef.Process(fUniversal("CREATE", sUser, sPassword));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return "-1";
-            }
-        }
-
-        //Creates a customer
-        private string CreateCustAcc(string userName)
-        {
-            string sFName, sLName, sAccount;
-
-            try
-            {
                 do
                 {
                     Console.Clear();
@@ -357,8 +335,8 @@ namespace nsATMWCFC
                 Console.Clear();
                 Console.WriteLine("Your account number is: " + sAccount);
                 System.Threading.Thread.Sleep(3500);
-    
-                return ATMWFCRef.Process(fUniversal("CREATECUSTACC", sUser, sFName + " " + sLName + "," + sAccount));
+
+                return ATMWFCRef.Process(fUniversal("CREATE", sUser, sPassword + ";" + sFName + ";" + sLName + ";" + sAccount));
             }
             catch (Exception ex)
             {
@@ -396,8 +374,26 @@ namespace nsATMWCFC
         {
             try
             {
+                char cChoice = '\0';
+                Boolean bFirsPass = true;
+
                 Console.Clear();
-                return ATMWFCRef.Process(fUniversal("BALANCE", sUser, "N"));
+                Console.WriteLine("Would you like to see the account's turnover? (Y/N)");
+                do
+                {
+                    if (!bFirsPass)
+                    {
+                        if (!(cChoice.ToString().Equals("\r") || cChoice.ToString().Equals("\n")))
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Incorrect choice! Please, enter Y or N!");
+                        }
+                    }
+                    cChoice = Console.ReadKey(true).KeyChar;
+                    bFirsPass = false;
+                } while (Char.ToUpper(cChoice) != 'Y' && Char.ToUpper(cChoice) != 'N');
+                Console.Clear();
+                return ATMWFCRef.Process(fUniversal("BALANCE", sUser, cChoice.ToString().ToUpper()));
             }
             catch (Exception ex)
             {
@@ -406,10 +402,10 @@ namespace nsATMWCFC
             }
         }
 
-        //Universal function
+        //Universal function - string connector, comma separated
         private string fUniversal(string sAction, string sUser = "", string sArgsList = "")
         {
-                return sAction + "," + sUser + "," + sArgsList;
+            return sAction + "," + sUser + "," + sArgsList;
         }
 
         //Main method

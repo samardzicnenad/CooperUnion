@@ -1,0 +1,34 @@
+DROP SCHEMA `atm`;
+
+CREATE SCHEMA `atm`;
+
+
+delimiter $$
+
+CREATE TABLE `atm`.`customer` (
+  `idCustomer` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(25) NOT NULL,
+  `pass` varchar(25) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `account` varchar(45) NOT NULL,
+  `cDate` varchar(25) NOT NULL,
+  PRIMARY KEY (`idCustomer`),
+  UNIQUE KEY `idCustomer_UNIQUE` (`idCustomer`),
+  UNIQUE KEY `account_UNIQUE` (`account`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8$$
+
+
+delimiter $$
+
+CREATE TABLE `atm`.`transaction` (
+  `idTransaction` int(11) NOT NULL AUTO_INCREMENT,
+  `tStamp` varchar(45) NOT NULL,
+  `account` varchar(45) NOT NULL,
+  `debit` double NOT NULL,
+  `credit` double NOT NULL,
+  PRIMARY KEY (`idTransaction`),
+  UNIQUE KEY `idTransaction_UNIQUE` (`idTransaction`),
+  KEY `fkAcc_idx` (`account`),
+  CONSTRAINT `fkAcc` FOREIGN KEY (`account`) REFERENCES `customer` (`account`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8$$
