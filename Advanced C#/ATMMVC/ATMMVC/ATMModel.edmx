@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ATMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ATMModelStoreContainer">
+          <EntitySet Name="customer" EntityType="ATMModel.Store.customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="transaction" EntityType="ATMModel.Store.transaction" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_transaction_transaction" Association="ATMModel.Store.FK_transaction_transaction">
+            <End Role="transaction" EntitySet="transaction" />
+            <End Role="transaction1" EntitySet="transaction" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="idCustomer" />
+          </Key>
+          <Property Name="idCustomer" Type="int" Nullable="false" />
+          <Property Name="user" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="pass" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="firstName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="lastName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="account" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="cDate" Type="varchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="idTransaction" />
+          </Key>
+          <Property Name="idTransaction" Type="int" Nullable="false" />
+          <Property Name="tStamp" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="account" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="debit" Type="float" Nullable="false" />
+          <Property Name="credit" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_transaction_transaction">
+          <End Role="transaction" Type="ATMModel.Store.transaction" Multiplicity="1" />
+          <End Role="transaction1" Type="ATMModel.Store.transaction" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="transaction">
+              <PropertyRef Name="idTransaction" />
+            </Principal>
+            <Dependent Role="transaction1">
+              <PropertyRef Name="idTransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ATMModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ATMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customers" EntityType="ATMModel.customer" />
+          <EntitySet Name="transactions" EntityType="ATMModel.transaction" />
+        </EntityContainer>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="idCustomer" />
+          </Key>
+          <Property Name="idCustomer" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="pass" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="account" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="cDate" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="idTransaction" />
+          </Key>
+          <Property Name="idTransaction" Type="Int32" Nullable="false" />
+          <Property Name="tStamp" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="account" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="debit" Type="Double" Nullable="false" />
+          <Property Name="credit" Type="Double" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ATMModelStoreContainer" CdmEntityContainer="ATMEntities">
+          <EntitySetMapping Name="customers"><EntityTypeMapping TypeName="ATMModel.customer"><MappingFragment StoreEntitySet="customer">
+            <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+            <ScalarProperty Name="user" ColumnName="user" />
+            <ScalarProperty Name="pass" ColumnName="pass" />
+            <ScalarProperty Name="firstName" ColumnName="firstName" />
+            <ScalarProperty Name="lastName" ColumnName="lastName" />
+            <ScalarProperty Name="email" ColumnName="email" />
+            <ScalarProperty Name="account" ColumnName="account" />
+            <ScalarProperty Name="cDate" ColumnName="cDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="transactions">
+            <EntityTypeMapping TypeName="IsTypeOf(ATMModel.transaction)">
+              <MappingFragment StoreEntitySet="transaction">
+                <ScalarProperty Name="credit" ColumnName="credit" />
+                <ScalarProperty Name="debit" ColumnName="debit" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="tStamp" ColumnName="tStamp" />
+                <ScalarProperty Name="idTransaction" ColumnName="idTransaction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ATMModel">
+        <EntityTypeShape EntityType="ATMModel.customer" Width="1.5" PointX="3.125" PointY="0.5" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATMModel.transaction" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333331" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

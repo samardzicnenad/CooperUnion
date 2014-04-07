@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ATMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ATMModelStoreContainer">
+          <EntitySet Name="customer" EntityType="ATMModel.Store.customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="transaction" EntityType="ATMModel.Store.transaction" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="idCustomer" />
+          </Key>
+          <Property Name="idCustomer" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="firstName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="lastName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="account" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="cDate" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="idTransaction" />
+          </Key>
+          <Property Name="idTransaction" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tStamp" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="account" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="debit" Type="float" Nullable="false" />
+          <Property Name="credit" Type="float" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ATMModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ATMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customers" EntityType="ATMModel.customer" />
+          <EntitySet Name="transactions" EntityType="ATMModel.transaction" />
+        </EntityContainer>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="idCustomer" />
+          </Key>
+          <Property Name="idCustomer" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="account" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="cDate" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="idTransaction" />
+          </Key>
+          <Property Name="idTransaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tStamp" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="account" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="debit" Type="Double" Nullable="false" />
+          <Property Name="credit" Type="Double" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ATMModelStoreContainer" CdmEntityContainer="ATMEntities">
+          <EntitySetMapping Name="customers"><EntityTypeMapping TypeName="ATMModel.customer"><MappingFragment StoreEntitySet="customer">
+            <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+            <ScalarProperty Name="firstName" ColumnName="firstName" />
+            <ScalarProperty Name="lastName" ColumnName="lastName" />
+            <ScalarProperty Name="account" ColumnName="account" />
+            <ScalarProperty Name="cDate" ColumnName="cDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="transactions"><EntityTypeMapping TypeName="ATMModel.transaction"><MappingFragment StoreEntitySet="transaction">
+            <ScalarProperty Name="idTransaction" ColumnName="idTransaction" />
+            <ScalarProperty Name="tStamp" ColumnName="tStamp" />
+            <ScalarProperty Name="account" ColumnName="account" />
+            <ScalarProperty Name="debit" ColumnName="debit" />
+            <ScalarProperty Name="credit" ColumnName="credit" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ATMEntity">
+        <EntityTypeShape EntityType="ATMModel.customer" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATMModel.transaction" Width="1.5" PointX="2.75" PointY="0.75" Height="2.172587890625" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
